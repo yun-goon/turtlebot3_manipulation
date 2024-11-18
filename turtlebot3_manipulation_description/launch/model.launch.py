@@ -55,7 +55,7 @@ def generate_launch_description():
                 [
                     FindPackageShare('turtlebot3_manipulation_description'),
                     'urdf',
-                    'turtlebot3_manipulation.urdf.xacro'
+                    'open_manipulator_x_robot.urdf.xacro'
                 ]
             ),
             ' ',

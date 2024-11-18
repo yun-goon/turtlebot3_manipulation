@@ -88,7 +88,7 @@ def generate_launch_description():
                 [
                     FindPackageShare('turtlebot3_manipulation_description'),
                     'urdf',
-                    'turtlebot3_manipulation.urdf.xacro'
+                    'open_manipulator_x_robot.urdf.xacro'
                 ]
             ),
             ' ',
@@ -158,20 +158,20 @@ def generate_launch_description():
         output='screen',
     )
 
-    diff_drive_controller_spawner = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['diff_drive_controller', '-c', '/controller_manager'],
-        output='screen',
-        condition=UnlessCondition(use_sim)
-    )
+    # diff_drive_controller_spawner = Node(
+    #     package='controller_manager',
+    #     executable='spawner',
+    #     arguments=['diff_drive_controller', '-c', '/controller_manager'],
+    #     output='screen',
+    #     condition=UnlessCondition(use_sim)
+    # )
 
-    imu_broadcaster_spawner = Node(
-        package='controller_manager',
-        executable='spawner',
-        arguments=['imu_broadcaster'],
-        output='screen',
-    )
+    # imu_broadcaster_spawner = Node(
+    #     package='controller_manager',
+    #     executable='spawner',
+    #     arguments=['imu_broadcaster'],
+    #     output='screen',
+    # )
 
     arm_controller_spawner = Node(
         package='controller_manager',
@@ -194,21 +194,21 @@ def generate_launch_description():
         )
     )
 
-    delay_diff_drive_controller_spawner_after_joint_state_broadcaster_spawner = \
-        RegisterEventHandler(
-            event_handler=OnProcessExit(
-                target_action=joint_state_broadcaster_spawner,
-                on_exit=[diff_drive_controller_spawner],
-            )
-        )
+    # delay_diff_drive_controller_spawner_after_joint_state_broadcaster_spawner = \
+    #     RegisterEventHandler(
+    #         event_handler=OnProcessExit(
+    #             target_action=joint_state_broadcaster_spawner,
+    #             on_exit=[diff_drive_controller_spawner],
+    #         )
+    #     )
 
-    delay_imu_broadcaster_spawner_after_joint_state_broadcaster_spawner = \
-        RegisterEventHandler(
-            event_handler=OnProcessExit(
-                target_action=joint_state_broadcaster_spawner,
-                on_exit=[imu_broadcaster_spawner],
-            )
-        )
+    # delay_imu_broadcaster_spawner_after_joint_state_broadcaster_spawner = \
+    #     RegisterEventHandler(
+    #         event_handler=OnProcessExit(
+    #             target_action=joint_state_broadcaster_spawner,
+    #             on_exit=[imu_broadcaster_spawner],
+    #         )
+    #     )
 
     delay_arm_controller_spawner_after_joint_state_broadcaster_spawner = \
         RegisterEventHandler(
@@ -231,8 +231,8 @@ def generate_launch_description():
         robot_state_pub_node,
         joint_state_broadcaster_spawner,
         delay_rviz_after_joint_state_broadcaster_spawner,
-        delay_diff_drive_controller_spawner_after_joint_state_broadcaster_spawner,
-        delay_imu_broadcaster_spawner_after_joint_state_broadcaster_spawner,
+        # delay_diff_drive_controller_spawner_after_joint_state_broadcaster_spawner,
+        # delay_imu_broadcaster_spawner_after_joint_state_broadcaster_spawner,
         delay_arm_controller_spawner_after_joint_state_broadcaster_spawner,
         delay_gripper_controller_spawner_after_joint_state_broadcaster_spawner,
     ]
